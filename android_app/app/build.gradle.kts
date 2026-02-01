@@ -73,4 +73,7 @@ dependencies {
 
     // 4. 아이콘 확장 (레시피 아이콘 등)
     implementation(libs.androidx.material.icons.extended)
+
+    // JackPack Compose 전용
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 }

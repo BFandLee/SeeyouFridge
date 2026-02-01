@@ -8,6 +8,7 @@ espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.09.00"
+lifecycle = "2.7.0"
 
 # 1. 네트워크 (Retrofit + OkHttp)
 retrofit = "2.9.0"
@@ -54,6 +55,9 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 
 # --- [아이콘 확장팩] ---
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "materialIcons" }
+
+# Jatpack Compose 전용
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
