@@ -1,5 +1,5 @@
 from ultralytics import YOLO
-from PIL import Image
+from PIL import Image, ImageOps
 import io
 
 class YoloService:
@@ -12,24 +12,14 @@ class YoloService:
             print(f"❌ YOLO 모델 로드 실패: {e}")
             self.model = None
 
-    def detect_ingredients(self, image_bytes: bytes):
+    def preprocess_image(self, image_bytes: bytes) -> Image.Image:
+        """바이트 -> PIL 이미지 변환 + 회전 보정(갤럭시 이슈 해결)"""
+        image = Image.open(io.BytesIO(image_bytes))
+        image = ImageOps.exif_transpose(image) # ★ 핵심: 사진 일으켜 세우기
+        return image
+
+    def detect(self, image: Image.Image, conf=0.4):
+        """추론 실행 및 결과 반환 (Segment 모델)"""
         if not self.model:
             return []
-
-        # 바이트 -> 이미지 변환
-        image = Image.open(io.BytesIO(image_bytes))
-        
-        # 추론 (conf=0.4: 확신 40% 이상만)
-        results = self.model(image, conf=0.4)
-        
-        detected = []
-        for result in results:
-            for box in result.boxes:
-                cls_id = int(box.cls[0])
-                name = result.names[cls_id]
-                conf = float(box.conf[0])
-                detected.append({"name": name, "confidence": round(conf, 2)})
-        
-        # 중복 제거 (set 활용)
-        unique_names = list({item['name'] for item in detected})
-        return unique_names
+        return self.model(image, conf=conf)

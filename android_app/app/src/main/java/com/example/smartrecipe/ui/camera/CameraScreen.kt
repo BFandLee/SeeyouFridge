@@ -133,15 +133,15 @@ fun CameraScreen(
                 Icon(Icons.Default.Delete, contentDescription = "초기화")
             }
         }
-        
+
         // 레시피 추천받기 버튼 (재료가 있을 때만 활성화)
         Button(
             onClick = { onNavigateToRecipe(ingredients) },
             modifier = Modifier.align(Alignment.TopStart).padding(16.dp),
             enabled = ingredients.isNotEmpty(),
-            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
         ) {
-            Icon(Icons.Default.RestaurantMenu, contentDescription = null)
+            Icon(Icons.Default.RestaurantMenu, contentDescription = null, tint=Color.White)
             Spacer(modifier = Modifier.width(8.dp))
             Text("이 재료로 요리 추천받기", color = Color.Black)
         }
@@ -150,6 +150,7 @@ fun CameraScreen(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .background(Color.Black.copy(alpha = 0.7f))
+                .navigationBarsPadding()        // 시스템 하단 바 높이만큼 자동으로 밀어줌
                 .padding(16.dp)
                 .fillMaxWidth()
         ) {
