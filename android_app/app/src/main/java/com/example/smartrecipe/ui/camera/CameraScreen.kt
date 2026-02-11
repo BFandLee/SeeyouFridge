@@ -181,9 +181,7 @@ fun CameraScreen(
                 Button(onClick = { captureImage(context, imageCapture) { viewModel.uploadIngredientImage(it) } }) {
                     Text("재료 촬영")
                 }
-                Button(onClick = { captureImage(context, imageCapture) { viewModel.uploadLabelImage(it) } }) {
-                    Text("라벨 촬영")
-                }
+
             }
 
             Spacer(modifier = Modifier.height(8.dp))

@@ -2,6 +2,7 @@ package com.example.smartrecipe.ui.camera
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.smartrecipe.data.model.IngredientTranslator
 import com.example.smartrecipe.data.repository.RecipeRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -46,27 +47,20 @@ class CameraViewModel : ViewModel() {
             _uiState.value = CameraUiState.Loading
             val result = repository.uploadIngredientImage(file)
             result.onSuccess { response ->
-                // 바로 _ingredients에 넣지 않음! Success 상태에 담아서 보냄
-                _uiState.value = CameraUiState.Success(response.ingredients)
+                // 서버에서 온 영어 리스트를 한글로 변환
+                val englishList = response.ingredients
+                val koreanList = englishList.map { englishName ->
+                    // 번역기 사용
+                    IngredientTranslator.toKorean(englishName)
+                }
+                // 변환된 한글 리스트를 성공 상태에 담음
+                _uiState.value = CameraUiState.Success(koreanList)
             }.onFailure { e ->
                 _uiState.value = CameraUiState.Error("인식 실패: ${e.message}")
             }
         }
     }
 
-    // OCR + LLM
-    fun uploadLabelImage(file: File) {
-        viewModelScope.launch {
-            _uiState.value = CameraUiState.Loading
-            val result = repository.uploadLabelImage(file)
-            result.onSuccess { response ->
-                // 라벨은 하나만 나오지만 리스트 형태로 통일해서 보냄
-                _uiState.value = CameraUiState.Success(listOf(response.result.productName))
-            }.onFailure { e ->
-                _uiState.value = CameraUiState.Error("라벨 인식 실패: ${e.message}")
-            }
-        }
-    }
 
     fun resetState() {
         _uiState.value = CameraUiState.Idle

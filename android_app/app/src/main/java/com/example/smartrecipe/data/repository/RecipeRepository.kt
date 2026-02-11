@@ -1,7 +1,6 @@
 package com.example.smartrecipe.data.repository
 
 import com.example.smartrecipe.data.api.RetrofitClient
-import com.example.smartrecipe.data.model.RecipeRequest
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -19,23 +18,8 @@ class RecipeRepository {
         Result.failure(e)
     }
 
-    // 2. 라벨 이미지 업로드
-    suspend fun uploadLabelImage(file: File) = try {
-        val part = prepareFilePart("file", file)
-        val response = api.getLabelInfo(part)
-        Result.success(response)
-    } catch (e: Exception) {
-        Result.failure(e)
-    }
 
-    // 3. 레시피 추천 받기
-    suspend fun getRecipeRecommendation(ingredients: List<String>) = try {
-        val request = RecipeRequest(ingredients)
-        val response = api.getRecipe(request)
-        Result.success(response)
-    } catch (e: Exception) {
-        Result.failure(e)
-    }
+
 
     // [내부 함수] 파일을 MultipartBody.Part로 변환하는 기계
     private fun prepareFilePart(partName: String, file: File): MultipartBody.Part {

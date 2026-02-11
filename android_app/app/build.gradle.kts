@@ -36,6 +36,7 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 }
 
@@ -76,4 +77,7 @@ dependencies {
 
     // JackPack Compose 전용
     implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // 네비게이션
+    implementation(libs.androidx.navigation.compose)
 }

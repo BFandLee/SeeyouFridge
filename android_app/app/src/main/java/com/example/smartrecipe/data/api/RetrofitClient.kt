@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
     // Hugging face를 통한 배포 주소 https://alphgo-smart-recipe-server.hf.space <-- 허깅 페이스 주소
-    private const val BASE_URL = "  https://ba56ebc92078.ngrok-free.app/"
+    private const val BASE_URL = " https://alphgo-smart-recipe-server.hf.space/ "
 
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY // 로그창에 통신 내용 다 보여줌

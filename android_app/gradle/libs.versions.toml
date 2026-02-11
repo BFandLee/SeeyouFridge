@@ -9,6 +9,7 @@ lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.09.00"
 lifecycle = "2.7.0"
+navigationCompose = "2.8.5"
 
 # 1. 네트워크 (Retrofit + OkHttp)
 retrofit = "2.9.0"
@@ -22,6 +23,7 @@ coil = "2.5.0"
 
 # 4. 아이콘 (Material Icons Extended)
 materialIcons = "1.6.0"
+appcompat = "1.7.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -58,6 +60,9 @@ androidx-material-icons-extended = { group = "androidx.compose.material", name =
 
 # Jatpack Compose 전용
 androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle"}
+
+# 네비게이션
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
