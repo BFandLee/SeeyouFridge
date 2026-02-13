@@ -185,7 +185,7 @@ LLM은 기본적으로 확률에 기반하여 비정형 텍스트를 생성하�
 
 **1) 프로젝트 클론**
 ```bash
-git clone [https://github.com/](https://github.com/)[본인의-깃허브-아이디]/SeeyouFridge.git
+git clone https://github.com/BFandLee/SeeyouFridge.git
 ```
 
 **2) API 주소 설정 **
